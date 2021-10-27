@@ -30,4 +30,25 @@ const btnSliderHandler =
 
 buttonNext.addEventListener('click', btnSliderHandler('next'));
 buttonPrev.addEventListener('click', btnSliderHandler('prev'));
-image.addEventListener('wheel', (e) => btnSliderHandler(e.deltaY > 0 ? 'next' : 'prev'));
+image.addEventListener('wheel', (e) =>
+  btnSliderHandler(e.deltaY > 0 ? 'next' : 'prev')
+);
+
+//-------------------------------------
+
+const uniqueBtn = document.getElementById('unique');
+
+uniqueBtn.addEventListener('click', btnUniqHandler);
+
+function btnUniqHandler(evenObject) {
+  console.group('some');
+  console.dir(evenObject.currentTarget);//who's handler is worked
+  console.dir(evenObject.target);//on what element was click
+  console.groupEnd('');
+}
+
+window.addEventListener('click',btnUniqHandler);
+document.addEventListener('click',btnUniqHandler);
+document.body.addEventListener('click',btnUniqHandler);
+
+// uniqueBtn.dispatchEvent(new MouseEvent('click'));
