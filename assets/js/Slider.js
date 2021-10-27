@@ -1,5 +1,5 @@
 class Slider {
-  constructor(images = [], currentIndex = 0) {
+  constructor(images, currentIndex = 0) {
     this._images = images;
     this.currentIndex = currentIndex;
   }
@@ -18,9 +18,12 @@ class Slider {
     return this.images[this.currentIndex];
   }
   next() {
-    return this._currentIndex + 1;
+    return (this._currentIndex + 1) % this._images.length;
   }
   prev() {
-    return this._currentIndex - 1;
+    return (
+      (this._currentIndex - 1 + this._images.length) %
+      this._images.length
+    );
   }
 }
