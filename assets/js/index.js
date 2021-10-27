@@ -38,17 +38,16 @@ image.addEventListener('wheel', (e) =>
 
 const uniqueBtn = document.getElementById('unique');
 
-uniqueBtn.addEventListener('click', btnUniqHandler);
+uniqueBtn.addEventListener('click', (e) => {
+  console.log(e.target.innerText);
+  console.log(e.target.textContent);
+});
 
-function btnUniqHandler(evenObject) {
-  console.group('some');
-  console.dir(evenObject.currentTarget);//who's handler is worked
-  console.dir(evenObject.target);//on what element was click
-  console.groupEnd('');
+document.body.addEventListener('click', btnUniqHandler);
+
+function btnUniqHandler(e) {
+  console.log(e.target.innerText);
+  console.log(e.target.textContent);
 }
 
-window.addEventListener('click',btnUniqHandler);
-document.addEventListener('click',btnUniqHandler);
-document.body.addEventListener('click',btnUniqHandler);
-
-// uniqueBtn.dispatchEvent(new MouseEvent('click'));
+uniqueBtn.dispatchEvent(new MouseEvent('click'));
