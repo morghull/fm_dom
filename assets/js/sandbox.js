@@ -1,7 +1,7 @@
 'use strict';
 
 function createCounter() {
-  let i = 0; //closed variable
+  let i = 0; //closure variable
   return function counter() {
     i++;
     return i;
