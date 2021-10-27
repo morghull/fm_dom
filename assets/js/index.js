@@ -31,23 +31,14 @@ const btnSliderHandler =
 buttonNext.addEventListener('click', btnSliderHandler('next'));
 buttonPrev.addEventListener('click', btnSliderHandler('prev'));
 image.addEventListener('wheel', (e) =>
-  btnSliderHandler(e.deltaY > 0 ? 'next' : 'prev')
+  btnSliderHandler(e.deltaY > 0 ? 'next' : 'prev')()
 );
 
 //-------------------------------------
 
-const uniqueBtn = document.getElementById('unique');
+// const uniqueImage = document.getElementById('unique');
 
-uniqueBtn.addEventListener('click', (e) => {
-  console.log(e.target.innerText);
-  console.log(e.target.textContent);
-});
+// const srcAttr = document.createAttribute('src');
+// srcAttr.value = imagesDB[0];
 
-document.body.addEventListener('click', btnUniqHandler);
-
-function btnUniqHandler(e) {
-  console.log(e.target.innerText);
-  console.log(e.target.textContent);
-}
-
-uniqueBtn.dispatchEvent(new MouseEvent('click'));
+// uniqueImage.setAttributeNode(srcAttr);
