@@ -1,37 +1,32 @@
 'use strict';
 
-const btns = document.querySelectorAll('#root>button');
-const root = document.getElementById('root');
+const cardsContainer = document.getElementById('cardsContainer');
 
-const btnHandler = ({
-  target: {
-    dataset: { color },
-    parentNode: parent,
-  },
-}) => {
-  parent.style.backgroundColor = color;
-};
-const secondClickHandler = ({ currentTarget }) => {
-  console.dir(currentTarget);
-};
-for (const btn of btns) {
-  btn.addEventListener('click', btnHandler);
-  btn.addEventListener('click', secondClickHandler);
-  btn.addEventListener(
-    'click',
-    () => {
-      console.log(123);
-    },
-    { capture: true, once: true }
-  );
+const HTMLElements = actors.map((actor) => createActorCard(actor));
+
+function createActorCard({ photo, name, birthdate }) {
+  const cardWrapper = document.createElement('li');
+  cardWrapper.classList.add('cardWrapper');
+
+  const cardContainer = document.createElement('article');
+  cardContainer.classList.add('cardContainer');
+
+  const cardImage = document.createElement('img');
+  cardImage.setAttribute('src', photo);
+  cardImage.setAttribute('alt', name);
+  cardImage.classList.add('cardImage');
+
+  const cardName = document.createElement('h2');
+  cardName.append(document.createTextNode(name));
+  cardName.classList.add('cardName');
+
+  const cardDescription = document.createElement('p');
+  cardDescription.append(document.createTextNode(birthdate));
+  cardDescription.classList.add('cardDescription');
+
+  cardContainer.append(cardImage, cardName, cardDescription);
+  cardWrapper.appendChild(cardContainer);
+  return cardWrapper;
 }
 
-document
-  .getElementById('root')
-  .addEventListener('click', secondClickHandler, {
-    capture: true,
-    once: true,
-  });
-document.body.addEventListener('click', secondClickHandler, true);
-document.addEventListener('click', secondClickHandler, true);
-window.addEventListener('click', secondClickHandler, true);
+cardsContainer.append(...HTMLElements);
