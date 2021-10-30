@@ -11,10 +11,20 @@ function createActorCard({ photo, name, birthdate }) {
   const cardContainer = document.createElement('article');
   cardContainer.classList.add('cardContainer');
 
+  const cardImageWrapper = document.createElement('div');
+  cardImageWrapper.classList.add('cardImageWrapper');
+
+  const cardInitials = document.createElement('div');
+  cardInitials.classList.add('cardInitials');
+  cardInitials.append(document.createTextNode(name[0]));
+
   const cardImage = document.createElement('img');
   cardImage.setAttribute('src', photo);
   cardImage.setAttribute('alt', name);
+  cardImage.addEventListener('error', handleImageError);
   cardImage.classList.add('cardImage');
+
+  cardImageWrapper.append(cardInitials, cardImage);
 
   const cardName = document.createElement('h2');
   cardName.append(document.createTextNode(name));
@@ -24,9 +34,13 @@ function createActorCard({ photo, name, birthdate }) {
   cardDescription.append(document.createTextNode(birthdate));
   cardDescription.classList.add('cardDescription');
 
-  cardContainer.append(cardImage, cardName, cardDescription);
+  cardContainer.append(cardImageWrapper, cardName, cardDescription);
   cardWrapper.appendChild(cardContainer);
   return cardWrapper;
 }
 
 cardsContainer.append(...HTMLElements);
+
+function handleImageError({ target }) {
+  target.remove();
+}
