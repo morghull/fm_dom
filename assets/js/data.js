@@ -11,7 +11,7 @@ const actors = [
     name: 'Robert Downey',
     birthdate: 'April 4, 1965',
     photo:
-      'https://tr.web.img3.acsta.net/c_310_420/pictures/210/017/21001798_20130426172912097.jpgs',
+      'https://tr.web.img3.acsta.net/c_310_420/pictures/210/017/21001798_20130426172912097.jpg',
   },
   {
     id: 3,
