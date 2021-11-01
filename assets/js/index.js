@@ -9,51 +9,49 @@ const HTMLElements = actors.map((actor) =>
 );
 
 function createActorCard(actor) {
-  const { name, birthdate } = actor;
-
-  const cardWrapper = document.createElement('li');
-  cardWrapper.classList.add('cardWrapper');
-
-  const cardContainer = document.createElement('article');
-  cardContainer.classList.add('cardContainer');
-
-  const cardName = document.createElement('h2');
-  cardName.append(
-    document.createTextNode(name || 'noname')
-  );
-  cardName.classList.add('cardName');
-
-  const cardDescription = document.createElement('p');
-  cardDescription.append(
-    document.createTextNode(birthdate || 'unknown')
-  );
-  cardDescription.classList.add('cardDescription');
-
-  cardContainer.append(
+ return createElement('li',{classNames:['cardWrapper']},
+   createElement('article',{classNames:['cardContainer']},
     createImageWrapper(actor),
-    cardName,
-    cardDescription
+    createElement('h2',{classNames:['cardName']},
+      document.createTextNode(actor.name || 'noname')
+    ),
+    createElement('p',{classNames:['cardDescription']},
+      document.createTextNode(actor.birthdate || 'unknown')
+    ),
+   )
   );
-  cardWrapper.appendChild(cardContainer);
-  return cardWrapper;
 }
 cardsContainer.append(...HTMLElements);
 
+/**
+ *
+ * @param {string} type
+ * @param {object} options
+ * @param {Node[]} children
+ */
+function createElement(type, { classNames }, ...children) {
+  const elem = document.createElement(type);
+  elem.classList.add(...classNames);
+  //elem.addEventListener('click',onClick);
+  elem.append(...children);
+  return elem;
+}
+
 function createImageWrapper(actor) {
   const { name, id } = actor;
-  const cardImageWrapper = document.createElement('div');
-  cardImageWrapper.setAttribute('id', `wrapper${id}`);
-  cardImageWrapper.classList.add('cardImageWrapper');
+  const imageWrapper = document.createElement('div');
+  imageWrapper.setAttribute('id', `wrapper${id}`);
+  imageWrapper.classList.add('cardImageWrapper');
 
-  const cardInitials = document.createElement('div');
-  cardInitials.classList.add('cardInitials');
-  cardInitials.append(
+  const initials = document.createElement('div');
+  initials.classList.add('cardInitials');
+  initials.append(
     document.createTextNode(getInitials(name || 'noname'))
   );
-  cardInitials.style.backgroundColor = stringToColour(name);
+  initials.style.backgroundColor = stringToColour(name);
 
-  cardImageWrapper.append(cardInitials, createImage(actor));
-  return cardImageWrapper;
+  imageWrapper.append(initials, createImage(actor));
+  return imageWrapper;
 }
 
 function createImage({ photo, name, id }) {
@@ -76,7 +74,7 @@ function handleImageLoader({
     dataset: { id },
   },
 }) {
-  document.getElementById(`wrapper${id}`).appent(target);
+  document.getElementById(`wrapper${id}`).append(target);
 }
 
 function stringToColour(str) {
