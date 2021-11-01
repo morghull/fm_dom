@@ -4,21 +4,33 @@ const cardsContainer = document.getElementById(
   'cardsContainer'
 );
 
-const HTMLElements = actors.map((actor) =>
-  createActorCard(actor)
-);
+const HTMLElements = actors
+  .filter(
+    (actor) => actor.name && actor.photo && actor.birthdate
+  )
+  .map((actor) => createActorCard(actor));
 
 function createActorCard(actor) {
- return createElement('li',{classNames:['cardWrapper']},
-   createElement('article',{classNames:['cardContainer']},
-    createImageWrapper(actor),
-    createElement('h2',{classNames:['cardName']},
-      document.createTextNode(actor.name || 'noname')
-    ),
-    createElement('p',{classNames:['cardDescription']},
-      document.createTextNode(actor.birthdate || 'unknown')
-    ),
-   )
+  return createElement(
+    'li',
+    { classNames: ['cardWrapper'] },
+    createElement(
+      'article',
+      { classNames: ['cardContainer'] },
+      createImageWrapper(actor),
+      createElement(
+        'h2',
+        { classNames: ['cardName'] },
+        document.createTextNode(actor.name || 'noname')
+      ),
+      createElement(
+        'p',
+        { classNames: ['cardDescription'] },
+        document.createTextNode(
+          actor.birthdate || 'unknown'
+        )
+      )
+    )
   );
 }
 cardsContainer.append(...HTMLElements);
