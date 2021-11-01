@@ -47,7 +47,6 @@ cardsContainer.append(...HTMLElements);
 function createElement(type, { classNames }, ...children) {
   const elem = document.createElement(type);
   elem.classList.add(...classNames);
-  //elem.addEventListener('click',onClick);
   elem.append(...children);
   return elem;
 }
