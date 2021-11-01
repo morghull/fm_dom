@@ -8,30 +8,14 @@ const HTMLElements = actors.map((actor) =>
   createActorCard(actor)
 );
 
-function createActorCard({ photo, name, birthdate }) {
+function createActorCard(actor) {
+  const { name, birthdate } = actor;
+
   const cardWrapper = document.createElement('li');
   cardWrapper.classList.add('cardWrapper');
 
   const cardContainer = document.createElement('article');
   cardContainer.classList.add('cardContainer');
-
-  const cardImageWrapper = document.createElement('div');
-  cardImageWrapper.classList.add('cardImageWrapper');
-
-  const cardInitials = document.createElement('div');
-  cardInitials.classList.add('cardInitials');
-  cardInitials.append(
-    document.createTextNode(getInitials(name || 'noname'))
-  );
-  cardInitials.style.backgroundColor = stringToColour(name);
-
-  const cardImage = document.createElement('img');
-  cardImage.setAttribute('src', photo);
-  cardImage.setAttribute('alt', getInitials(name));
-  cardImage.addEventListener('error', handleImageError);
-  cardImage.classList.add('cardImage');
-
-  cardImageWrapper.append(cardInitials, cardImage);
 
   const cardName = document.createElement('h2');
   cardName.append(
@@ -46,18 +30,53 @@ function createActorCard({ photo, name, birthdate }) {
   cardDescription.classList.add('cardDescription');
 
   cardContainer.append(
-    cardImageWrapper,
+    createImageWrapper(actor),
     cardName,
     cardDescription
   );
   cardWrapper.appendChild(cardContainer);
   return cardWrapper;
 }
-
 cardsContainer.append(...HTMLElements);
+
+function createImageWrapper(actor) {
+  const { name, id } = actor;
+  const cardImageWrapper = document.createElement('div');
+  cardImageWrapper.setAttribute('id', `wrapper${id}`);
+  cardImageWrapper.classList.add('cardImageWrapper');
+
+  const cardInitials = document.createElement('div');
+  cardInitials.classList.add('cardInitials');
+  cardInitials.append(
+    document.createTextNode(getInitials(name || 'noname'))
+  );
+  cardInitials.style.backgroundColor = stringToColour(name);
+
+  cardImageWrapper.append(cardInitials, createImage(actor));
+  return cardImageWrapper;
+}
+
+function createImage({ photo, name, id }) {
+  const image = document.createElement('img');
+  image.classList.add('cardImage');
+  image.setAttribute('src', photo);
+  image.setAttribute('alt', getInitials(name));
+  image.dataset.id = id;
+  image.addEventListener('error', handleImageError);
+  image.addEventListener('load', handleImageLoader);
+  return image;
+}
 
 function handleImageError({ target }) {
   target.remove();
+}
+function handleImageLoader({
+  target,
+  target: {
+    dataset: { id },
+  },
+}) {
+  document.getElementById(`wrapper${id}`).appent(target);
 }
 
 function stringToColour(str) {
