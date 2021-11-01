@@ -62,7 +62,6 @@ function createImage({ photo, name, id }) {
   image.dataset.id = id;
   image.addEventListener('error', handleImageError);
   image.addEventListener('load', handleImageLoader);
-  return image;
 }
 
 function handleImageError({ target }) {
