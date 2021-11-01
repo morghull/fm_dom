@@ -62,7 +62,8 @@ function createImageWrapper(actor) {
   );
   initials.style.backgroundColor = stringToColour(name);
 
-  imageWrapper.append(initials, createImage(actor));
+  imageWrapper.append(initials);
+  createImage(actor);
   return imageWrapper;
 }
 
