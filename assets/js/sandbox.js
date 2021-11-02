@@ -1,32 +1,32 @@
 'use strict';
 
-function createCounter(initial = 0) {
-  let i = initial; //closure variable
-  return {
-    increment() {
-      return ++i;
-    },
-    decrement() {
-      return --i;
-    },
-  };
+const pattern1 = new RegExp('\\b\\w{4}\\b', 'g');
+const pattern2 = /\b\w{4}\b/g;
+
+if (pattern2.test('qwer 1231 @#$#')) {
+  console.log(true);
+}else{
+  console.log(false);
 }
 
-const counter1 = createCounter(10);
-const counter2 = createCounter();
+const str = 'All 1956my troubles 1998seemed 1999so far away';
+const pattern3 = /\b(\d{4})([a-z]+))/gi;
+const pattern4 = /\b(?:\d{4})([a-z]+))/gi;
 
-counter1.increment();
-counter1.increment();
-counter1.decrement();
-counter2.increment();
-counter2.increment();
+const newStr = str.replace(pattern3,'$1');
+//All 1956 troubles 1998 1999 far away
 
-const createAdder =
-  (initialValue = 0) =>
-  (value) =>
-    (initialValue += value);
+const newStr = str.replace(pattern3,'$2');
+//All my troubles seemed so far away
 
-const adder1 = createAdder(10);
-console.log(adder1(10));
-console.log(adder1(4));
-console.log(adder1(3));
+const newStr = str.replace(pattern3,'$&');
+//All 1956my troubles 1998seemed 1999so far away
+
+const newStr = str.replace(pattern4,'$1');
+//All my troubles seemed so far away
+
+const str2 = 'All 1956my troubles qweqwe1998seemed 1999so far away';
+const pattern5 = /\b(?:[a-z]*)(\d{4})([a-z]+))/gi;
+
+const newStr = str.replace(pattern5,'$2 - $1');
+//All my - 1956 troubles seemed - 1998 so - 1999 far away
