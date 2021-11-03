@@ -1,38 +1,30 @@
 'use strict';
 
-// const result = [];
+const btn = document.getElementById('btn');
+btn.addEventListener('click', btnHandler);
 
-// const form = document.getElementById('root-form');
+function btnHandler(e) {}
 
-// form.addEventListener('submit', (e) => {
-//   e.preventDefault();
-//   const {
-//     target: { textInput },
-//   } = e;
-//   console.dir(textInput.value);
+console.log(1);
+const identificator = setTimeout(() => {
+  console.log(3);
+}, 1500);
+console.log(2);
 
-//   [...e.target.elements]
-//     .map((elem) => elem.value.trim())
-//     .filter((value) => value)
-//     .map((value) => {
-//       result.push(value);
-//       document
-//         .getElementById('lists')
-//         .append(
-//           createElement(
-//             'li',
-//             { classNames: 'submited-value' },
-//             document.createTextNode(value)
-//           )
-//         );
-//     });
-//   e.target.reset();
-//   console.log(result);
-// });
+clearTimeout(identificator);
 
-// function createElement(type, { classNames }, ...children) {
-//   const elem = document.createElement(type);
-//   elem.classList.add(...classNames);
-//   elem.append(...children);
-//   return elem;
-// }
+const c1 = counter();
+const c2 = counter();
+function counter() {
+  let i = 1;
+  return function (pattern) {
+    const id = setInterval(() => {
+      console.log(pattern,i++);
+      if (i > 10) {
+        clearInterval(id);
+      }
+    }, 500);
+  };
+}
+c1('c1');
+c2('c2');
