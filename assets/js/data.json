@@ -1,0 +1,18 @@
+[
+  {
+    "doorLabel": "bath",
+    "windowCount": 0,
+    "tables": null,
+    "users": ["user1", "user2", "user3"]
+  },
+  {
+    "doorLabel": "citchen",
+    "windowCount": 2,
+    "tables": [
+      {
+        "name": "coffe table"
+      }
+    ],
+    "users": ["user1", "user2", "user3"]
+  }
+]

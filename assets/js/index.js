@@ -1,49 +1,26 @@
 'use strict';
 
-const btn = document.getElementById('btn');
-btn.addEventListener('click', btnHandler);
+const user = {
+  name: 'Elon',
+  sname: 'Musk',
+  age: 50,
+  getFullName() {
+    return `${this.name} ${this.sname}`;
+  },
+  children: ['one', 'two'],
+  isAdult: true,
+  hasPet: undefined,
+  isUkraine: null,
+  [Symbol('test')]: 123,
+  friends: {
+    friend1: 'Tom',
+    friend2: 'Tim',
+  },
+};
 
-function btnHandler(e) {}
+console.log(user);
+const serializedUser = JSON.stringify(user);
+console.log(serializedUser);
 
-console.log(1);
-const identificator = setTimeout(() => {
-  console.log(3);
-}, 1500);
-console.log(2);
-
-clearTimeout(identificator);
-
-const c1 = counterWithInterval()('i1');
-const c2 = counterWithInterval()('i2');
-const c3 = counterWithTimeout()('t3');
-
-function counterWithInterval() {
-  let i = 1;
-  return function (pattern) {
-    const id = setInterval(() => {
-      console.log(pattern, i++);
-      if (i > 10) {
-        clearInterval(id);
-      }
-    }, 500);
-  };
-}
-
-function counterWithTimeout() {
-  let i = 1;
-  let id;
-  const loop = function (pattern) {
-    clearTimeout(id);
-    if (i <= 10) {
-      console.log(pattern, i++);
-      id = setTimeout(() => {
-        loop(pattern);
-      }, 500);
-    }
-  };
-  return function (pattern) {
-    id = setTimeout(() => {
-      loop(pattern);
-    }, 500);
-  };
-}
+const deSerealizedUser = JSON.parse(serializedUser);
+console.log(deSerealizedUser);
