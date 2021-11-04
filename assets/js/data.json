@@ -3,7 +3,7 @@
     "doorLabel": "bath",
     "windowCount": 0,
     "tables": null,
-    "users": ["user1", "user2", "user3"]
+    "users": ["Andrey", "Tanya", "Katya"]
   },
   {
     "doorLabel": "citchen",
@@ -13,6 +13,6 @@
         "name": "coffe table"
       }
     ],
-    "users": ["user1", "user2", "user3"]
+    "users": ["Andrey", "Tanya", "Katya"]
   }
 ]

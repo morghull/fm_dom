@@ -1,26 +1,62 @@
 'use strict';
 
-const user = {
-  name: 'Elon',
-  sname: 'Musk',
-  age: 50,
-  getFullName() {
-    return `${this.name} ${this.sname}`;
-  },
-  children: ['one', 'two'],
-  isAdult: true,
-  hasPet: undefined,
-  isUkraine: null,
-  [Symbol('test')]: 123,
-  friends: {
-    friend1: 'Tom',
-    friend2: 'Tim',
-  },
-};
+// const promiseData = fetch('./assets/js/data.json');
+// console.log(promiseData);
+// promiseData.then((response) => {
+//   console.log('ok');
+//   console.log(response);
+//   const jsonPromise = response.json();
+//   jsonPromise.then((data) => {
+//     console.table(data);
+//   });
+//   // const textPromise = response.text();
+//   // textPromise.then((data) => {
+//   //   console.log('text data:', data);
+//   // });
+// });
+fetch('./assets/js/data.json')
+  .then((response) => response.json())
+  .then((data) => {
+    data.forEach((obj) => {
+      console.log(obj.doorLabel);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  .finally(() => {
+    console.log('done');
+  });
 
-console.log(user);
-const serializedUser = JSON.stringify(user);
-console.log(serializedUser);
+const customPromise = new Promise(executor);
 
-const deSerealizedUser = JSON.parse(serializedUser);
-console.log(deSerealizedUser);
+function executor(resolve, reject) {
+  Math.random() > 0.5 ? resolve('ok') : reject('lose');
+}
+
+customPromise
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+function timeout(ms) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject('error');
+    }, ms);
+  });
+}
+
+timeout(1000)
+  .then(() => {
+    console.log(1);
+  })
+  .catch(() => {
+    console.log(2);
+  })
+  .finaly(() => {
+    console.log(3);
+  });
