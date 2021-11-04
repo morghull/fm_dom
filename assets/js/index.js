@@ -1,62 +1,22 @@
 'use strict';
 
-// const promiseData = fetch('./assets/js/data.json');
-// console.log(promiseData);
-// promiseData.then((response) => {
-//   console.log('ok');
-//   console.log(response);
-//   const jsonPromise = response.json();
-//   jsonPromise.then((data) => {
-//     console.table(data);
-//   });
-//   // const textPromise = response.text();
-//   // textPromise.then((data) => {
-//   //   console.log('text data:', data);
-//   // });
-// });
-fetch('./assets/js/data.json')
-  .then((response) => response.json())
-  .then((data) => {
-    data.forEach((obj) => {
-      console.log(obj.doorLabel);
-    });
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-  .finally(() => {
-    console.log('done');
-  });
-
-const customPromise = new Promise(executor);
-
-function executor(resolve, reject) {
-  Math.random() > 0.5 ? resolve('ok') : reject('lose');
-}
-
-customPromise
-  .then((data) => {
-    console.log(data);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-function timeout(ms) {
+function loadImage(path) {
+  const image = new Image();
+  image.src = path;
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      reject('error');
-    }, ms);
+    image.addEventListener('load', () => {
+      resolve(image);
+    });
+    image.addEventListener('error', () => {
+      reject(new Error('path invalid'));
+    });
   });
 }
 
-timeout(1000)
-  .then(() => {
-    console.log(1);
+loadImage('https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg')
+  .then((elem) => {
+    document.body.prepend(elem);
   })
-  .catch(() => {
-    console.log(2);
-  })
-  .finaly(() => {
-    console.log(3);
+  .catch((err) => {
+    console.log(err);
   });
