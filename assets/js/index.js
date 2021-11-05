@@ -1,13 +1,9 @@
 'use strict';
 
-function handlePromise(promise) {
-  return promise.then((data) => {
-    console.log('in function: ', data);
-  }).catch((err)=>{
-    console.log('in function: ', err);
-  });
+const root = document.getElementById('root');
+
+root.addEventListener('click', rootClickHandler);
+
+function rootClickHandler({ target }) {
+  if (target.parentNode === root) target.innerText += '!';
 }
-
-handlePromise(Promise.resolve(10));
-
-handlePromise(Promise.reject('error'));
