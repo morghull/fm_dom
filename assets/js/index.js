@@ -2,14 +2,26 @@
 
 console.log('start');
 
-try {
-  console.log('try 1');
-  throw Error();
-  console.log('try 2');
-} catch (error) {
-  console.log('catch error');
-} finally {
-  console.log('finally');
-}
+setTimeout(() => {
+  console.log('setTimeout');
+}, 0);
+
+const pr1 = new Promise((resolve, reject) => {
+  console.log('promise start');
+  resolve();
+  reject();
+  console.log('promise end');
+});
+
+pr1
+  .then(() => {
+    console.log('resolve');
+  })
+  .catch(() => {
+    console.log('reject');
+  })
+  .finally(() => {
+    console.log('finally');
+  });
 
 console.log('end');
