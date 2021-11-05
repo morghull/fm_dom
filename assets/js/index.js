@@ -1,22 +1,25 @@
 'use strict';
 
-function loadImage(path) {
-  const image = new Image();
-  image.src = path;
-  return new Promise((resolve, reject) => {
-    image.addEventListener('load', () => {
-      resolve(image);
-    });
-    image.addEventListener('error', () => {
-      reject(new Error('path invalid'));
-    });
-  });
-}
+const pr1 = fetch('./assets/js/data.js');
 
-loadImage('https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg')
-  .then((elem) => {
-    document.body.prepend(elem);
+pr1
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(JSON.stringify(data));
   })
   .catch((err) => {
-    console.log(err);
+    if (err instanceof SyntaxError) console.log('syntax!');
+    else console.log(err);
+  })
+  .finally(() => {
+    console.log('end');
   });
+
+try {
+  const userNum = prompt();
+  if (isNaN(userNum)) {
+    throw new Error();
+  }
+} catch (error) {}
+
+console.log('qwerty');
